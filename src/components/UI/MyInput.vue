@@ -1,5 +1,10 @@
 <template>
-  <input :value="modelValue" @input="updateInput" class="input" type="text" />
+  <input
+    :value="modelValue ? modelValue : $route.query.q1"
+    @input="updateInput"
+    class="search__input"
+    type="text"
+  />
 </template>
 
 <script>
@@ -10,14 +15,13 @@ export default {
   },
   methods: {
     updateInput(event) {
-      console.log(event.target.value);
       this.$emit("update:modelValue", event.target.value);
     },
   },
 };
 </script>
 <style scoped>
-.input {
+.search__input {
   border: none;
   background: #444;
   color: #fff;

@@ -1,19 +1,18 @@
 <template>
   <router-link
     :to="{ name: 'animePage', params: { id: series.id } }"
-    class="anime__card"
+    class="anime-card"
   >
     <img
       :src="series.attributes.posterImage.small"
       src-placeholder="../assets/logo.png"
-      load
     />
-    <span class="anime-episodes"
+    <span class="anime-card__episodes"
       >eps<i>{{
         series.attributes.episodeCount ? series.attributes.episodeCount : "-"
       }}</i></span
     >
-    <span class="anime__name">
+    <span class="anime-card__name">
       <h2>
         {{
           series.attributes.titles["en"]
@@ -41,15 +40,17 @@ export default {
 </script>
 
 <style scoped>
-.anime__card {
+.anime-card {
+  display: inline-block;
   max-width: 166px;
   position: relative;
   height: 100%;
   z-index: 1;
   cursor: pointer;
   opacity: 1;
+  justify-self: center;
 }
-.anime__card:hover::before {
+.anime-card:hover::before {
   content: "";
   position: absolute;
   background: rgba(0, 0, 0, 0.534);
@@ -57,7 +58,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.anime-episodes {
+.anime-card__episodes {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -74,7 +75,7 @@ export default {
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   z-index: 8;
 }
-.anime__name {
+.anime-card__name {
   position: absolute;
   bottom: 0;
   left: 0;

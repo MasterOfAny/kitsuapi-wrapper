@@ -5,9 +5,10 @@
       <div class="anime__header">
         <img
           v-if="animeTarget.attributes.coverImage"
-          class="anime__poster large"
+          class="anime__poster-large"
           :src="animeTarget.attributes.coverImage.small"
         />
+        <div class="anime__poster-none" v-else></div>
         <span class="anime__title">
           <h1>{{ animeTarget.attributes.canonicalTitle }}</h1>
         </span>
@@ -20,12 +21,12 @@
           <div class="anime__extra">
             <img
               v-if="animeTarget.attributes.posterImage"
-              class="anime__poster small"
+              class="anime__poster-small"
               :src="animeTarget.attributes.posterImage.small"
             />
             <div class="links">
               <div class="genre-list">
-                <span class="link__header">Genre:</span>
+                <span class="genres">Genre:</span>
                 <span
                   class="genre"
                   v-for="(genre, index) in genres"
@@ -112,10 +113,12 @@ export default {
 }
 .anime__title {
   position: absolute;
-  top: 40%;
+  display: block;
+  top: 0;
   width: 100%;
   height: auto;
   z-index: 4;
+  padding-top: 20px;
 }
 h1 {
   color: white;
@@ -123,12 +126,15 @@ h1 {
   font-size: 50px;
   text-shadow: 4px 4px 20px rgb(255 255 255);
 }
-.large {
+.anime__poster-large {
   display: block;
   width: 100%;
 }
-.small {
+.anime__poster-small {
   max-width: 160px;
+}
+.anime__poster-none {
+  height: 200px;
 }
 .anime__info {
   padding: 20px 40px;
@@ -141,17 +147,16 @@ h1 {
 }
 .anime__extra {
   display: flex;
-
   margin-top: 20px;
 }
 .genre {
   color: #79c142;
   margin-right: 5px;
 }
-.link__header {
+.link__header,
+.genres {
   color: white;
 }
-
 .genre:last-child {
   margin-right: 0;
 }
@@ -164,14 +169,16 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .small {
+  .anime__poster-large {
     display: none;
   }
   .anime__target {
     margin-top: 5px;
   }
   .anime__title {
-    top: 30%;
+    position: relative;
+    display: block;
+    padding: 20px 5px;
   }
   .anime__description {
     display: flex;
@@ -184,18 +191,24 @@ h1 {
     font-size: 35px;
   }
   .anime__extra {
+    padding-top: 10px;
     justify-content: space-around;
+    column-gap: 10px;
   }
   .anime__sinopsys {
     text-align: justify;
     margin-top: 10px;
     font-size: 16px;
+    padding-bottom: 20px;
   }
   .links {
-    flex-direction: row;
+    flex-direction: column;
     margin-left: 0;
     column-gap: 8px;
     font-size: 14px;
+  }
+  .anime__poster-none {
+    display: none;
   }
 }
 </style>

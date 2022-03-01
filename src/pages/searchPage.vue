@@ -1,40 +1,12 @@
 <template>
-  <header class="header">
-    <div class="container">
-      <nav class="navbar">
-        <router-link :to="{ name: 'main' }" class="header__logo"
-          >Anime-api wrapper</router-link
-        >
-        <div class="header__links">
-          <a class="header__btn">movies</a>
-          <router-link :to="{ name: 'allAnime' }" class="header__btn"
-            >series</router-link
-          >
-          <a class="header__btn">genres</a>
-        </div>
-        <form id="search" @submit.prevent>
-          <my-input
-            v-model="query"
-            class="input-search"
-            placeholder="Search..."
-          />
-          <button type="submit" class="btn-search" @click="submitSearch">
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
-      </nav>
-    </div>
-  </header>
+  <headerUI></headerUI>
   <div class="wrapper">
     <div class="search">
       <span class="search-value"
         >Search results for "{{ $route.query.q1 }}"</span
       >
     </div>
-
-    <anime-list :anime="loadAnime" v-if="!isLoad && animeSearch"></anime-list>
-    <div class="no-result" v-else>No result found.</div>
-
+    <anime-list :anime="loadAnime"></anime-list>
     <div class="push"></div>
   </div>
   <footerUI></footerUI>
@@ -65,10 +37,6 @@ export default {
     async fetchAnime() {
       try {
         this.isLoad = true;
-        if (this.crit == "favoritesCount") {
-          this.crit = "-" + this.crit;
-        }
-
         const responce = await axios.get(
           "https://kitsu.io/api/edge/anime?filter[text]=" +
             this.query +
@@ -88,6 +56,8 @@ export default {
   },
   computed: {
     loadAnime() {
+      this.query = this.$route.query.q1;
+      this.fetchAnime();
       return this.animeSearch;
     },
   },

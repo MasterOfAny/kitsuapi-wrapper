@@ -1,5 +1,5 @@
 <template >
-  <div class="anime__list-wrapper" v-show="anime">
+  <div class="anime-list" v-show="anime">
     <anime-item
       v-for="(series, index) in anime"
       :series="series"
@@ -22,28 +22,11 @@ export default {
 </script>
 
 <style scoped>
-.anime__list-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+.anime-list {
   margin-top: 50px;
-  row-gap: 50px;
-  column-gap: 25px;
-}
-
-@media (max-width: 1800px) and (min-width: 601px) {
-  .anime__list-wrapper {
-    row-gap: 20px;
-    column-gap: 35px;
-    justify-content: center;
-  }
-}
-@media (max-width: 600px) {
-  .anime__list-wrapper {
-    row-gap: 20px;
-    column-gap: 15px;
-    justify-content: center;
-    margin-top: 15px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 186px);
+  grid-row-gap: 25px;
+  justify-content: center;
 }
 </style>

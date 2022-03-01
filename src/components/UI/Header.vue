@@ -2,53 +2,37 @@
   <header class="header">
     <div class="container">
       <nav class="navbar">
-        <router-link :to="{ name: 'main' }" class="header__logo"
+        <router-link :to="{ name: 'main' }" class="navbar__header-logo"
           >Anime-api wrapper</router-link
         >
-        <div class="header__links">
-          <a class="header__btn">movies</a>
-          <router-link :to="{ name: 'allAnime' }" class="header__btn"
+        <div class="navbar__links">
+          <a class="navbar__link-btn">movies</a>
+          <router-link :to="{ name: 'allAnime' }" class="navbar__link-btn"
             >series</router-link
           >
-          <a class="header__btn">genres</a>
+          <a class="navbar__link-btn">genres</a>
         </div>
-        <form id="search" @submit.prevent>
-          <my-input
-            v-model="searchQuery"
-            class="input-search"
-            placeholder="Search..."
-          />
-          <button
-            type="submit"
-            class="btn-search"
-            @click="
-              $router.push({
-                name: 'searchPage',
-                query: { q1: searchQuery },
-              })
-            "
-          >
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
+        <search-form></search-form>
       </nav>
     </div>
   </header>
 </template>
 
 <script>
+import SearchForm from "@/components/SearchForm";
 export default {
-  name: "headerUI",
-  data() {
-    return {
-      searchQuery: "",
-    };
+  components: {
+    SearchForm,
   },
-  methods: {},
+  name: "headerUI",
 };
 </script>
 
 <style>
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
 .header {
   background: #2c2f30;
   padding: 20px 0;
@@ -60,36 +44,30 @@ export default {
   display: flex;
   align-items: center;
 }
-.header__links {
-  display: flex;
-  column-gap: 20px;
-  margin-left: 200px;
-}
-a {
-  text-decoration: none;
-  cursor: pointer;
-}
-.header__logo {
+.navbar__header-logo {
   color: #79c142;
   cursor: pointer;
   font-size: 28px;
 }
-
-#search {
-  margin-left: auto;
+.navbar__links {
+  display: flex;
+  column-gap: 20px;
+  margin-left: 200px;
 }
-.input-search {
-  width: 400px;
-}
-
-.header__btn {
+.navbar__link-btn {
   font-size: 20px;
   color: white;
 }
-.header__btn:hover {
+.navbar__link-btn:hover {
   color: #79c142;
 }
-.btn-search {
+#search {
+  margin-left: auto;
+}
+.navbar__search-input {
+  width: 400px;
+}
+.navbar__search-btn {
   padding: 10px 15px;
   background: none;
   color: white;
@@ -103,10 +81,10 @@ a {
   font: normal normal normal 18px/1 FontAwesome;
 }
 @media (max-width: 1300px) and (min-width: 1001px) {
-  .header__links {
+  .navbar__links {
     margin-left: 50px;
   }
-  .input-search {
+  .navbar__search-input {
     width: 350px;
   }
 }
@@ -115,21 +93,21 @@ a {
     padding: 0;
     padding-bottom: 10px;
   }
-  #search {
-    margin-top: 10px;
-    text-align: center;
+  .navbar {
+    display: block;
   }
-  .input-search {
-    width: 80%;
-  }
-  .header__links {
+  .navbar__links {
     margin-top: 10px;
     display: flex;
     column-gap: 20px;
     margin-left: 0;
   }
-  .navbar {
-    display: block;
+  #search {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .navbar__search-input {
+    width: 80%;
   }
 }
 </style>

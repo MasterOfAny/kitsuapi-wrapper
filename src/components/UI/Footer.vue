@@ -1,8 +1,8 @@
 <template>
   <footer id="footer">
     <div class="container">
-      <div class="copyright">
-        <p class="copyright-text">
+      <div class="footer__copyright">
+        <p class="footer__copyright-text">
           Copyright Anime-api wrapper © 2022 | All rights reserved | Track Anime
           Online
         </p>
@@ -24,7 +24,7 @@ export default {
   text-align: center;
 }
 
-.copyright-text {
+.footer__copyright-text {
   color: white;
   font-size: 20px;
 }
